@@ -1,0 +1,46 @@
+name: UI y capturas para Play
+on:
+  push:
+    branches: [main, renovacion-premium-2026]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  chrome:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright@1.56.1
+      - name: Probar app y generar capturas
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/bm-web.log 2>&1 &
+          node tests/ui-smoke.cjs
+      - name: Guardar capturas y banner de Play en la rama
+        if: github.ref == 'refs/heads/renovacion-premium-2026'
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          echo "Repository: $GITHUB_WORKSPACE"
+          pwd
+          ls -ld .git || true
+          git -C "$GITHUB_WORKSPACE" status --short
+          git -C "$GITHUB_WORKSPACE" config user.name "github-actions[bot]"
+          git -C "$GITHUB_WORKSPACE" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C "$GITHUB_WORKSPACE" add store-assets/screenshots/*.png store-assets/feature-graphic.png
+          if ! git -C "$GITHUB_WORKSPACE" diff --cached --quiet; then
+            git -C "$GITHUB_WORKSPACE" commit -m "assets: capturas reales y gráfico Google Play"
+            git -C "$GITHUB_WORKSPACE" push
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: BM-Construccion-Capturas
+          path: |
+            store-assets/screenshots/*.png
+            store-assets/feature-graphic.png
+          retention-days: 14

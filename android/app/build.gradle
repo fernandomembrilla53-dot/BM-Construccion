@@ -1,0 +1,30 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'dev.bmapps.construccion'
+    compileSdk 36
+    defaultConfig {
+        applicationId 'dev.bmapps.construccion'
+        minSdk 24
+        targetSdk 36
+        versionCode 1
+        versionName '3.0.0'
+    }
+    buildTypes { release { minifyEnabled false } }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    sourceSets {
+        main { assets.srcDirs = [layout.buildDirectory.dir('generated/bm-assets').get().asFile] }
+    }
+}
+dependencies { implementation 'androidx.webkit:webkit:1.17.1' }
+tasks.register('syncBmAssets', Copy) {
+    from(rootProject.projectDir.parentFile) {
+        include 'index.html', 'styles.css', 'app.js', 'calculations.js',
+                'manifest.json', 'sw.js', 'icon.svg', 'icon-192.png', 'icon-512.png',
+                'privacidad.html', 'terminos.html', 'fuentes.html'
+    }
+    into(layout.buildDirectory.dir('generated/bm-assets'))
+}
+tasks.named('preBuild') { dependsOn(tasks.named('syncBmAssets')) }

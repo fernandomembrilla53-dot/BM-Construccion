@@ -1,1 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="90" fill="#121217"/><path d="M80 190h352M80 290h352M80 390h352M80 90h352M80 90v300M432 90v300M256 90v100M168 190v100M344 190v100M256 290v100" stroke="#e33c46" stroke-width="20" fill="none"/><text x="256" y="275" font-size="88" font-family="Arial,sans-serif" font-weight="bold" fill="white" text-anchor="middle">BM</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="BM Construcción">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#263443"/><stop offset="1" stop-color="#0e1722"/></linearGradient>
+<linearGradient id="warm" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffca8b"/><stop offset="1" stop-color="#f0775f"/></linearGradient></defs>
+<rect width="512" height="512" rx="102" fill="#101722"/>
+<rect x="23" y="23" width="466" height="466" rx="89" fill="url(#bg)" stroke="#506675" stroke-width="2"/>
+<path d="M80 161 256 64l176 97" fill="none" stroke="url(#warm)" stroke-width="23" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M82 190v195m348-195v195" fill="none" stroke="#79c8c2" stroke-width="16" stroke-linecap="round"/>
+<path d="M82 408h348" stroke="url(#warm)" stroke-width="19" stroke-linecap="round"/>
+<path d="M118 170v13m277-13v13M256 89v20" stroke="#b4e1d6" stroke-width="5" stroke-linecap="round"/>
+<text x="256" y="340" font-family="DejaVu Sans, Arial, sans-serif" font-size="171" font-weight="900" letter-spacing="-9" fill="#fff5e9" text-anchor="middle">BM</text>
+<path d="M130 370h252" stroke="#f2a269" stroke-width="5" stroke-linecap="round" stroke-dasharray="22 13"/>
+</svg>
