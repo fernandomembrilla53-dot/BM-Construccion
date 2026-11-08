@@ -238,6 +238,9 @@
     return '"'+str.replace(/"/g,'""')+'"';
   }
   function downloadFile(filename,text,type){
+    if(window.BMAndroid && typeof window.BMAndroid.saveFile==="function"){
+      window.BMAndroid.saveFile(filename,text,type.split(";")[0]);return;
+    }
     var blob=new Blob([text],{type:type}),url=URL.createObjectURL(blob);
     var a=document.createElement("a");a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();
     setTimeout(function(){URL.revokeObjectURL(url);},3000);
@@ -275,7 +278,7 @@
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){showToast("Resultado copiado.");}).catch(function(){showToast("No se pudo copiar en este dispositivo.");});}
       else {var a=make("textarea");a.value=text;document.body.appendChild(a);a.select();try{document.execCommand("copy");showToast("Resultado copiado.");}catch(e){showToast("El portapapeles no está disponible.");}a.remove();}
     });
-    $("print-result").addEventListener("click",function(){window.print();});
+    $("print-result").addEventListener("click",function(){if(window.BMAndroid && typeof window.BMAndroid.printDocument==="function")window.BMAndroid.printDocument();else window.print();});
     $("export-csv").addEventListener("click",exportCSV);$("export-json").addEventListener("click",exportJSON);
     $("view-history").addEventListener("click",openHistory);
     $("close-history").addEventListener("click",function(){$("history-dialog").close();});
