@@ -1,1 +1,126 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#151515"><meta name="description" content="Calculadoras sencillas de materiales de construcción"><link rel="manifest" href="./manifest.json"><link rel="icon" href="./icon.svg" type="image/svg+xml"><title>BM Construcción</title><style>:root{font-family:system-ui,Arial,sans-serif;color:#f5f5f5;background:#101014}*{box-sizing:border-box}body{margin:0}header{background:#1b1b20;padding:22px 16px;border-bottom:3px solid #d63139}main{max-width:680px;margin:auto;padding:16px}h1{margin:0;color:#ff555d}h2{font-size:1.2rem}.muted{color:#c4c4cc}.tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:16px 0}button{border:0;border-radius:10px;padding:13px;background:#33333c;color:white;font-weight:700;font-size:15px;cursor:pointer}button.active,.primary{background:#ba2630}section{background:#1c1c23;border:1px solid #363640;padding:18px;border-radius:14px;margin:12px 0}label{display:block;margin:12px 0 5px}input,select{width:100%;padding:12px;border-radius:8px;border:1px solid #666;background:#111116;color:#fff;font-size:16px}.result{background:#282831;padding:14px;border-left:4px solid #ff555d;margin-top:16px;line-height:1.6}.hidden{display:none}a{color:#ff777d}footer{text-align:center;padding:20px;color:#aaa;font-size:13px}.note{font-size:13px;color:#c4c4cc}.pared{display:flex;gap:8px;align-items:end;margin:8px 0}.pared label{flex:1;margin:0}.pared button{background:#51232a;padding:12px}.pared input{width:100%}</style></head><body><header><h1>BM Construcción 🧱</h1><div class="muted">Calculá materiales para tu obra</div></header><main><nav class="tabs" aria-label="Calculadoras"><button class="active" data-tab="ladrillos">🧱 Ladrillos</button><button data-tab="hormigon">🏗️ Hormigón</button><button data-tab="pisos">📐 Pisos</button><button data-tab="pintura">🎨 Pintura</button></nav><section id="ladrillos"><h2>Calculadora de ladrillos</h2><p class="note">Agregá el largo de cada pared (por ejemplo 4, 8, 4 y 8 metros).</p><div id="paredes"></div><button type="button" onclick="agregarPared()">+ Agregar otra pared</button><label>Alto de las paredes (m)<input id="lh" type="number" min="0" step="any" value="2.5"></label><label>Superficie de aberturas (m²)<input id="lo" type="number" min="0" step="any" value="0"></label><label>Tipo de ladrillo<select id="lt"><option value="16">Hueco 12 × 18 × 33 cm (aprox. 16/m²)</option><option value="20">Hueco 8 × 18 × 33 cm (aprox. 16–20/m²; estimar 20)</option><option value="60">Común (aprox. 60/m²)</option></select></label><label>Desperdicio (%)<input id="ld" type="number" min="0" max="100" value="10"></label><button class="primary" onclick="calcular('ladrillos')">Calcular</button><div id="rl" class="result" role="status"></div><p class="note">Consumo orientativo: varía según juntas, medidas reales y aparejo.</p></section><section id="hormigon" class="hidden"><h2>Volumen de hormigón</h2><label>Largo (m)<input id="ha" type="number" min="0" step="any" value="4"></label><label>Ancho (m)<input id="hb" type="number" min="0" step="any" value="3"></label><label>Espesor (cm)<input id="hc" type="number" min="0" step="any" value="10"></label><label>Margen adicional (%)<input id="hd" type="number" min="0" max="100" value="5"></label><button class="primary" onclick="calcular('hormigon')">Calcular</button><div id="rh" class="result" role="status"></div><p class="note">Calcula volumen, no dosificación ni resistencia estructural. Para elementos portantes consultá a un profesional.</p></section><section id="pisos" class="hidden"><h2>Superficie de pisos</h2><label>Largo (m)<input id="pa" type="number" min="0" step="any" value="5"></label><label>Ancho (m)<input id="pb" type="number" min="0" step="any" value="4"></label><label>Cobertura por caja (m²)<input id="pc" type="number" min="0" step="any" value="2"></label><label>Desperdicio (%)<input id="pd" type="number" min="0" max="100" value="10"></label><button class="primary" onclick="calcular('pisos')">Calcular</button><div id="rp" class="result" role="status"></div></section><section id="pintura" class="hidden"><h2>Calculadora de pintura</h2><label>Superficie total de paredes (m²)<input id="ta" type="number" min="0" step="any" value="40"></label><label>Superficie sin pintar (m²)<input id="tb" type="number" min="0" step="any" value="4"></label><label>Rendimiento por litro y mano (m²)<input id="tc" type="number" min="0" step="any" value="10"></label><label>Cantidad de manos<input id="td" type="number" min="1" max="10" step="1" value="2"></label><button class="primary" onclick="calcular('pintura')">Calcular</button><div id="rt" class="result" role="status"></div><p class="note">Verificá el rendimiento indicado por el fabricante.</p></section><section><h2>Información</h2><p class="note">Los resultados son estimaciones y no reemplazan mediciones de obra ni asesoramiento técnico.</p><a href="./privacidad.html">Política de privacidad</a> · <a href="./terminos.html">Términos de uso</a></section></main><footer>© 2026 BM Apps · BM Construcción</footer><script>const $=id=>document.getElementById(id);const n=id=>Number($(id).value);const fmt=x=>x.toLocaleString('es-AR',{maximumFractionDigits:2});function agregarPared(valor=''){const d=document.createElement('div');d.className='pared';const l=document.createElement('label');l.textContent='Largo de pared (m)';const i=document.createElement('input');i.type='number';i.min='0';i.step='any';i.value=valor;i.className='largo-pared';l.appendChild(i);const b=document.createElement('button');b.type='button';b.textContent='Quitar';b.onclick=()=>{if(document.querySelectorAll('.pared').length>1)d.remove()};d.append(l,b);$('paredes').appendChild(d)}[4,8,4,8].forEach(v=>agregarPared(v));document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x===b));['ladrillos','hormigon','pisos','pintura'].forEach(id=>$(id).classList.toggle('hidden',id!==b.dataset.tab));}));function calcular(tipo){const ids={ladrillos:['lh','lo','lt','ld'],hormigon:['ha','hb','hc','hd'],pisos:['pa','pb','pc','pd'],pintura:['ta','tb','tc','td']}[tipo];if(ids.some(id=>!$(id).value.trim()||!Number.isFinite(n(id))||n(id)<0)){alert('Ingresá valores válidos, sin números negativos.');return}let s='';if(tipo==='ladrillos'){const largos=[...document.querySelectorAll('.largo-pared')].map(e=>Number(e.value));if(!largos.length||[...document.querySelectorAll('.largo-pared')].some(e=>!e.value.trim())||largos.some(v=>!Number.isFinite(v)||v<=0)){alert('Revisá los largos de las paredes.');return}let totalLargo=largos.reduce((a,b)=>a+b,0);let area=totalLargo*n('lh')-n('lo');if(n('lh')<=0||area<=0||n('ld')>100){alert('Revisá medidas, aberturas y desperdicio.');return}s=`Paredes: <b>${largos.length}</b><br>Largo total: <b>${fmt(totalLargo)} m</b><br>Superficie neta: <b>${fmt(area)} m²</b><br>Ladrillos estimados: <b>${Math.ceil(area*n('lt')*(1+n('ld')/100))}</b>`}if(tipo==='hormigon'){if(n('ha')<=0||n('hb')<=0||n('hc')<=0||n('hd')>100){alert('Revisá las medidas.');return}let v=n('ha')*n('hb')*n('hc')/100;s=`Volumen neto: <b>${fmt(v)} m³</b><br>Con margen: <b>${fmt(v*(1+n('hd')/100))} m³</b>`}if(tipo==='pisos'){if(n('pa')<=0||n('pb')<=0||n('pc')<=0||n('pd')>100){alert('Revisá las medidas.');return}let area=n('pa')*n('pb'),total=area*(1+n('pd')/100);s=`Superficie: <b>${fmt(area)} m²</b><br>Con desperdicio: <b>${fmt(total)} m²</b><br>Cajas estimadas: <b>${Math.ceil(total/n('pc'))}</b>`}if(tipo==='pintura'){let area=n('ta')-n('tb');if(area<=0||n('tc')<=0||!Number.isInteger(n('td'))||n('td')<1||n('td')>10){alert('Revisá superficies, rendimiento y manos.');return}s=`Superficie neta: <b>${fmt(area)} m²</b><br>Pintura estimada: <b>${fmt(area*n('td')/n('tc'))} litros</b>`}const out={ladrillos:'rl',hormigon:'rh',pisos:'rp',pintura:'rt'}[tipo];$(out).innerHTML=s}['ladrillos','hormigon','pisos','pintura'].forEach(calcular);if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));</script></body></html>
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101722">
+  <meta name="description" content="Calculadoras de obra: ladrillos, hormigón, pisos, pintura, revoques, carpetas, excavaciones, techos, hierro y pesos. Presupuestos y registro local sin conexión.">
+  <meta name="color-scheme" content="dark">
+  <meta property="og:title" content="BM Construcción · Tu obra en números">
+  <meta property="og:description" content="Planificá materiales, pesos, superficies y cantidades. Herramientas de obra en el bolsillo.">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>BM Construcción · Tu obra en números</title>
+  <script src="./calculations.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Ir a la calculadora</a>
+  <header class="masthead">
+    <div class="top-inner">
+      <a class="identity" href="./" aria-label="BM Construcción, inicio">
+        <img src="./icon.svg" width="46" height="46" alt="">
+        <span class="identity-text"><strong>BM<span>CONSTRUCCIÓN</span></strong><small>UNA HERRAMIENTA DE BM-APPS</small></span>
+      </a>
+      <div class="mast-actions">
+        <span class="status-dot" id="network-status" aria-live="polite">Disponible sin conexión</span>
+        <button class="install-btn" id="install-app" type="button" hidden>Instalar app</button>
+      </div>
+    </div>
+  </header>
+  <main class="page">
+    <section class="hero" aria-label="Presentación">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="tiny-line"></span> ESTUDIO DE OBRA DIGITAL</div>
+        <h1>Construí con <em>precisión.</em></h1>
+        <p>Medí, calculá y organizá materiales en un solo lugar. Sin cuentas, sin vueltas, en la obra o desde casa.</p>
+        <div class="hero-highlights">
+          <span>11 herramientas</span><span>Cálculos al instante</span><span>Historial privado</span>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="blueprint-grid"></div>
+        <div class="blueprint-label">BM / 2026</div>
+        <svg viewBox="0 0 390 260" role="presentation" fill="none">
+          <path d="M55 198 191 122l139 75-138 75z" stroke="#759d9d" stroke-width="2"/>
+          <path d="M55 198V103l137-76v95M192 122l138-76v151" stroke="#f5b67a" stroke-width="2"/>
+          <path d="M192 27 330 101M55 103l138 72 137-74" stroke="#7cc7c0" stroke-width="2"/>
+          <path d="M55 137l137 75 138-76M55 171l137 74 138-74" stroke="#759d9d" stroke-dasharray="5 9"/>
+          <path d="M112 132v-48l55-29v49M223 152v-48l51-28v48" stroke="#f5b67a" stroke-width="2"/>
+          <path d="M55 103 192 27 330 101 193 175z" fill="#ec9256" fill-opacity=".065"/>
+          <circle cx="192" cy="27" r="4" fill="#f5b67a"/><circle cx="330" cy="197" r="4" fill="#7cc7c0"/>
+          <path d="M36 103h-20M55 84V68M342 197h25M192 260v-14" stroke="#7cc7c0" stroke-width="1.5"/>
+          <text x="15" y="53" fill="#9ac6c1" font-size="11" letter-spacing="2">VISTA ISOMÉTRICA</text>
+          <text x="282" y="230" fill="#d6c0a5" font-size="11">ESC. 1:100</text>
+        </svg>
+      </div>
+    </section>
+    <div class="app-layout">
+      <aside class="tool-panel panel" aria-label="Seleccionar herramientas">
+        <div class="panel-heading">
+          <div><div class="overline">CAJA DE HERRAMIENTAS</div><h2>Explorar cálculos</h2></div>
+          <span class="count-chip">11</span>
+        </div>
+        <label class="sr-only" for="search-tools">Buscar calculadora</label>
+        <input class="tool-search" id="search-tools" type="search" placeholder="Buscar herramienta..." autocomplete="off">
+        <div id="tool-list" class="tool-list" role="navigation" aria-label="Calculadoras disponibles"></div>
+        <div class="sidebar-tip"><span class="tip-mark">i</span><p>Los datos de cada cálculo se pueden ajustar según el material que consigas.</p></div>
+      </aside>
+      <section class="work-panel panel" id="workspace" aria-label="Calculadora activa">
+        <div class="work-header">
+          <div><div class="overline" id="tool-category">CÁLCULO DE MATERIALES</div><h2 id="tool-title">Ladrillos y muros</h2><p id="tool-description">Estimá materiales para tus paredes.</p></div>
+          <span class="work-symbol" id="tool-symbol" aria-hidden="true">01</span>
+        </div>
+        <form id="calc-form" novalidate>
+          <div id="tool-fields" class="form-fields"></div>
+          <div class="form-footer">
+            <button class="button-main" type="submit">Calcular materiales <span aria-hidden="true">→</span></button>
+            <button class="button-quiet" id="reset-tool" type="button">Restablecer</button>
+          </div>
+        </form>
+        <div id="calc-error" class="form-error" role="alert" hidden></div>
+        <section class="results" id="results" aria-live="polite" aria-label="Resultados">
+          <div class="empty-result"><div class="empty-figure">01 / BM</div><h3>Listo para calcular</h3><p>Modificá las medidas y tocá «Calcular materiales».</p></div>
+        </section>
+        <div class="result-tools">
+          <button id="save-result" class="button-outline" type="button" disabled>Guardar en mi obra</button>
+          <button id="copy-result" class="button-outline" type="button" disabled>Copiar resultado</button>
+          <button id="print-result" class="button-outline" type="button" disabled>Imprimir</button>
+        </div>
+        <p id="tool-note" class="technical-note"></p>
+      </section>
+      <aside class="project-panel" aria-label="Resumen de mi obra">
+        <section class="panel project-card">
+          <div class="overline">TU ESPACIO DE TRABAJO</div>
+          <div class="project-heading"><h2>Mi obra</h2><span class="project-graphic" aria-hidden="true">↗</span></div>
+          <p>Organizá los resultados de tus cálculos en este dispositivo.</p>
+          <label for="project-name" class="field-label">Nombre del proyecto</label>
+          <input id="project-name" maxlength="70" placeholder="Ej.: Mi casa" value="Mi obra">
+          <div class="project-stats">
+            <div><strong id="saved-count">0</strong><span>Cálculos guardados</span></div>
+            <div><strong id="project-total">$ 0</strong><span>Subtotal estimado</span></div>
+          </div>
+          <div class="records-heading"><h3>Últimos cálculos</h3><button id="view-history" type="button">Ver todos</button></div>
+          <div id="saved-list" class="saved-list"><p class="muted-small">Tus cálculos aparecerán aquí.</p></div>
+          <div class="export-actions"><button type="button" id="export-csv" disabled>Exportar CSV</button><button type="button" id="export-json" disabled>Exportar copia</button></div>
+        </section>
+        <section class="panel field-guide">
+          <div class="overline">GUÍA TÉCNICA</div>
+          <h2>Datos con criterio.</h2>
+          <p>Las fichas de fabricantes y referencias argentinas ayudan a estimar. No reemplazan verificación de obra ni cálculo estructural.</p>
+          <a href="./fuentes.html">Consultar fuentes y supuestos <span aria-hidden="true">↗</span></a>
+        </section>
+      </aside>
+    </div>
+    <section class="bottom-banner">
+      <div><div class="overline">PENSADO PARA LA OBRA REAL</div><h2>Menos cuentas. Más obra.</h2><p>Funciona sin conexión después de la primera visita. Tus proyectos se guardan solamente en este dispositivo.</p></div>
+      <span class="banner-ornament" aria-hidden="true">BM<span> / APP</span></span>
+    </section>
+  </main>
+  <footer class="footer"><div><strong>BM-APPS</strong><span>Herramientas digitales para el trabajo real.</span></div><nav aria-label="Información legal"><a href="./fuentes.html">Fuentes</a><a href="./privacidad.html">Privacidad</a><a href="./terminos.html">Términos</a></nav><small>© 2026 BM-Apps. Cálculos orientativos.</small></footer>
+  <dialog id="history-dialog" aria-labelledby="history-title"><div class="dialog-head"><h2 id="history-title">Historial de mi obra</h2><button type="button" id="close-history" aria-label="Cerrar historial">Cerrar</button></div><div id="history-content"></div><div class="dialog-actions"><button type="button" id="delete-history">Borrar los cálculos de este proyecto</button></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
