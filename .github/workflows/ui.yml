@@ -24,6 +24,7 @@ jobs:
       - name: Guardar capturas y banner de Play en la rama
         if: github.ref == 'refs/heads/renovacion-premium-2026'
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           echo "Repository: $GITHUB_WORKSPACE"
           pwd
           ls -ld .git || true
