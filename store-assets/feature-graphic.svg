@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="500" viewBox="0 0 1024 500">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#172534"/><stop offset="1" stop-color="#0a1521"/></linearGradient>
+  <radialGradient id="glow" cx="70%" cy="45%" r="58%"><stop stop-color="#5c786f" stop-opacity=".35"/><stop offset="1" stop-color="#223544" stop-opacity="0"/></radialGradient>
+  <linearGradient id="copper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffd1a1"/><stop offset="1" stop-color="#ec845e"/></linearGradient>
+  <pattern id="grid" width="27" height="27" patternUnits="userSpaceOnUse"><path d="M27 0H0V27" fill="none" stroke="#476174" stroke-opacity=".22" stroke-width=".7"/></pattern>
+  <pattern id="dots" width="17" height="17" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#9cc9bf" opacity=".2"/></pattern>
+</defs>
+<rect width="1024" height="500" fill="url(#bg)"/>
+<rect width="1024" height="500" fill="url(#glow)"/>
+<rect width="1024" height="500" fill="url(#grid)"/>
+<rect x="0" width="13" height="500" fill="url(#copper)"/>
+<g transform="translate(55 55)">
+  <rect width="72" height="72" rx="17" fill="#182c38" stroke="#6b7778" stroke-width="1.5"/>
+  <path d="M13 33 36 18 59 33M16 40v17M56 40v17M13 61h46" fill="none" stroke="#eea16f" stroke-width="4" stroke-linecap="round"/>
+  <text x="36" y="50" text-anchor="middle" font-family="DejaVu Sans, sans-serif" fill="#fff1df" font-size="19" font-weight="900">BM</text>
+</g>
+<text x="147" y="85" font-family="DejaVu Sans,sans-serif" font-size="33" font-weight="800" letter-spacing="-1" fill="#f2f8f4">BM</text>
+<text x="208" y="85" font-family="DejaVu Sans,sans-serif" font-size="31" font-weight="800" letter-spacing="-1" fill="#f3a778">CONSTRUCCIÓN</text>
+<text x="57" y="173" font-family="DejaVu Sans,sans-serif" font-size="17" font-weight="700" letter-spacing="2.7" fill="#86c8bd">TU OBRA EN NÚMEROS</text>
+<text x="53" y="243" font-family="DejaVu Sans,sans-serif" font-size="58" font-weight="900" letter-spacing="-2" fill="#f2f5f2">Calculá.</text>
+<text x="53" y="308" font-family="DejaVu Sans,sans-serif" font-size="58" font-weight="900" letter-spacing="-2" fill="#f5b07c">Organizá.</text>
+<text x="53" y="373" font-family="DejaVu Sans,sans-serif" font-size="58" font-weight="900" letter-spacing="-2" fill="#f2f5f2">Construí.</text>
+<g transform="translate(55 420)">
+  <rect width="157" height="38" rx="19" fill="#284640" stroke="#4b867b"/><text x="78" y="24" text-anchor="middle" font-family="DejaVu Sans,sans-serif" fill="#c8f0e6" font-size="14" font-weight="700">11 herramientas</text>
+  <rect x="172" width="120" height="38" rx="19" fill="#354148" stroke="#657881"/><text x="232" y="24" text-anchor="middle" font-family="DejaVu Sans,sans-serif" fill="#f6d4b9" font-size="14" font-weight="700">Sin internet</text>
+  <rect x="307" width="144" height="38" rx="19" fill="#354148" stroke="#657881"/><text x="379" y="24" text-anchor="middle" font-family="DejaVu Sans,sans-serif" fill="#f6d4b9" font-size="14" font-weight="700">Mi presupuesto</text>
+</g>
+<g transform="translate(565 70)">
+  <rect x="3" y="0" width="444" height="362" rx="30" fill="#172838" fill-opacity=".64" stroke="#63817f" stroke-width="2"/>
+  <rect x="19" y="15" width="414" height="332" rx="23" fill="url(#dots)"/>
+  <g transform="translate(18 -8)" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M60 214 204 136l139 78-139 79z" stroke="#8bb8b2" stroke-width="2.5"/>
+    <path d="M60 214v-92l144-79v93M204 136l139-77v155" stroke="url(#copper)" stroke-width="3"/>
+    <path d="M60 122 204 43l139 83-139 79z" stroke="#81d3c5" stroke-width="2.5"/>
+    <path d="M60 154l144 79 139-77M60 182l144 80 139-79" stroke="#8bb8b2" stroke-opacity=".55" stroke-dasharray="7 8"/>
+    <path d="M105 146V99l53-28v48M229 151v-47l53-28v49" stroke="url(#copper)" stroke-width="3"/>
+    <path d="M204 43v-32M60 122H31M343 214h28M204 293v25" stroke="#7fb8b2" stroke-width="1.5"/>
+    <path d="M64 274 204 351 350 272" stroke="#89c5c0" stroke-opacity=".48" stroke-width="1.6" stroke-dasharray="8 9"/>
+    <path d="M204 43 343 126l-139 79-144-83z" fill="#eb9c6c" fill-opacity=".09"/>
+    <circle cx="204" cy="43" r="4.5" fill="#f2a269"/><circle cx="343" cy="214" r="4.5" fill="#81d3c5"/>
+  </g>
+  <text x="30" y="40" font-family="DejaVu Sans,sans-serif" font-size="11" font-weight="700" letter-spacing="2.2" fill="#a4d7d3">ESTUDIO DIGITAL</text>
+  <rect x="252" y="306" width="160" height="27" rx="6" fill="#31424d" stroke="#526d75"/>
+  <text x="332" y="324" text-anchor="middle" font-family="DejaVu Sans,sans-serif" font-size="11" letter-spacing="1" fill="#f0c2a1">MEDIDAS · m² · m³ · kg</text>
+</g>
+</svg>
