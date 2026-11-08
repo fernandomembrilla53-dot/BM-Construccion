@@ -1,0 +1,24 @@
+name: Calidad BM Construcción
+on:
+  push:
+    branches: [main, renovacion-premium-2026]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  pruebas:
+    name: Validar cálculos y estructura
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Sintaxis JavaScript
+        run: |
+          node --check calculations.js
+          node --check app.js
+          node --check sw.js
+      - name: Casos de prueba de cálculo
+        run: node --test tests/calculations.test.js
